@@ -134,7 +134,7 @@ if (!font.loadFromFile("arial.ttf"))
 		    if(i % 2 == 0)
 		    cir.setFillColor(Color::Red);
 		    else
-		    cir.setFillColor(Color::Green);
+		    cir.setFillColor(Color::Blue);
 		   
 		    
 		    window.draw(cir);

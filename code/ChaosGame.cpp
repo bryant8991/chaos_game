@@ -20,10 +20,11 @@ int main()
 	vector<Vector2f> vertices;
 	vector<Vector2f> points;
 	Font font;
-if (!font.loadFromFile("arial.ttf"))
-{
-    cout <<  "ERROR"<< endl;
-}
+
+	if (!font.loadFromFile("arial.ttf"))
+	{
+	    cout << "ERROR"<< endl;
+	}
 
 	while (window.isOpen())
 	{
@@ -42,15 +43,6 @@ if (!font.loadFromFile("arial.ttf"))
 		    }
 		    if (event.type == sf::Event::MouseButtonPressed)
 		    {
-			Text text;
-			text.setFont(font);
-			text.setString("Pick 3 points to begin!");
-			text.setColor(sf::Color::White);
-			text.setCharacterSize(12);
-			window.draw(text);
-			text.setString("Pick one last point!");
-			window.draw(text);
-
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
 			    std::cout << "the left button was pressed" << std::endl;
@@ -104,6 +96,26 @@ if (!font.loadFromFile("arial.ttf"))
 		****************************************
 		*/
 		window.clear();
+		Text text;
+		text.setFont(font);
+		text.setColor(sf::Color::White);
+		text.setCharacterSize(36);
+
+
+		if(vertices.size() < 3)
+		{
+		 int num = 3;
+		 num-= vertices.size();
+		 text.setString("Pick " + to_string(num) + " points to begin!");
+		}
+		
+		else if(points.size() == 0)
+		{
+		text.setString("Pick one last point!");
+		}
+
+		window.draw(text);
+
 		for(size_t i = 0; i < vertices.size(); i++)
 		{
 		    RectangleShape rect(Vector2f(10,10));
@@ -130,14 +142,13 @@ if (!font.loadFromFile("arial.ttf"))
 		{
 		    CircleShape cir(1);
 		    cir.setPosition(points[i]);
-		  
+
 		    if(i % 2 == 0)
 		    cir.setFillColor(Color::Red);
 		    else
 		    cir.setFillColor(Color::Blue);
-		   
-		    
-		    window.draw(cir);
+
+		   window.draw(cir);
 		}
 		window.display();
 	}
